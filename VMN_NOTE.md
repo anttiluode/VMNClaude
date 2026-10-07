@@ -194,6 +194,42 @@ An aside, flagged as an identification rather than a result: in a fluid, the loc
 
 ---
 
+## 5b. Adding a dimension: the doubled view
+
+Prompted by Antti watching 3Blue1Brown's *Solving problems by adding a dimension*. There, a confusing flat move (rotating three tiles) becomes a simple 3D move (adding one cube). The vortex coupling has the same kind of fix.
+
+The map $`z\mapsto M\bar z`$ is not complex-linear, which is what made it awkward. Promote $`\bar z`$ to its own coordinate. The oscillator layer linearised at rest, $`\dot z=Az+B\bar z`$, becomes an ordinary linear system on the doubled vector:
+
+```math
+\frac{d}{dt}\begin{pmatrix}z\\ \bar z\end{pmatrix}
+=\underbrace{\begin{pmatrix}A&B\\ \bar B&\bar A\end{pmatrix}}_{D}
+\begin{pmatrix}z\\ \bar z\end{pmatrix},
+\qquad
+A=i\Omega+(\text{linear coupling}),\quad B=\kappa M\ (\text{vortex coupling}).
+```
+
+$`D`$ has exactly the spectrum of the real $`2N\times2N`$ form: measured agreement $`2\times10^{-14}`$ over all Gate 1 configurations (`C6` in `vmn_checks.py`). Nothing is gained or lost by lifting; the structure just becomes visible. In the lifted picture, $`z`$ lives at $`+\omega`$ and $`\bar z`$ at $`-\omega`$, so linear coupling connects same-sense sectors and vortex coupling connects opposite-sense sectors.
+
+**One frequency for all units, $`\Omega=\omega I`$.** Squaring,
+
+```math
+D^2=\begin{pmatrix}-\omega^2+\kappa^2M\bar M&0\\0&-\omega^2+\kappa^2\bar MM\end{pmatrix},
+\qquad
+\lambda(D)=\pm\sqrt{\kappa^2\nu-\omega^2},\quad \nu\in\operatorname{spec}(M\bar M).
+```
+
+The off-diagonal blocks cancel exactly, $`i\omega\kappa M-\kappa M\,i\omega=0`$. That cancellation *is* the rotating-wave averaging from Gate 1, now a one-line identity instead of a story. Consequences, all verified to round-off on the Gate 1 matrices:
+
+- **Linear coupling** moves the onset at first order: shift $`=\kappa\max\operatorname{Re}\operatorname{eig}(M)`$.
+- **Vortex coupling** moves it only through the complex eigenvalues of $`M\bar M`$, at second order. Measured: shift 0.001 at κ = 0.1 and 0.0093 at κ = 0.3, about ×9 for ×3 in κ, against ×3 for linear coupling.
+- **Above a threshold** $`\kappa^*=\omega/\sqrt{\nu_{\max}}`$ (1.1–2.1 for the three Gate 1 seeds) a real $`\nu`$ makes $`\lambda`$ real: a parametric, Bogoliubov-type instability rather than a resonance. At κ = 3 the vortex shift (−2.45) overtakes the linear one (−2.01).
+
+Mixing rotation senses ($`\Omega=\omega S`$, $`S`$ a diagonal of ±1) breaks the cancellation: the off-diagonal blocks become $`i\omega\kappa(SM-MS)`$, which is nonzero exactly on opposite-sense pairs. That is the first-order coupling Gate 1b switched on.
+
+This doubling is standard (Bogoliubov transformations, the Nambu form in physics); nothing here is new except applying it to the VMN coupling. The analogue of the Archimedes hat-box step in the same video is the $`u=r^2`$ substitution in §4: it moves to the coordinate in which the amplitude equation becomes the logistic equation.
+
+---
+
 ## 6. Gate 1: the layer (done, results in [GATE1.md](GATE1.md))
 
 Short version: K1 fires when all units turn the same way (vortex coupling averages out) and passes when units turn both ways, as a follow-up rather than pre-registered; K2 fires (an echo state network wins); K3 passes for memory capacity. The design as first proposed:

@@ -320,5 +320,131 @@
       "predicted_-2G dr/(2 pi r^3)": -3.183098861837907e-05
     }
   },
-  "seconds": 68.2
+  "C6_doubled_view": {
+    "claim": "Doubling z -> (z, conj z) turns the antilinear vortex coupling into an ordinary linear matrix with the same spectrum. With one common frequency w, D^2 is block diagonal and eig(D)^2 = -w^2 + kappa^2 eig(M conj M): vortex coupling only shifts the onset through complex eigenvalues of M conj M (second order) until kappa reaches w/sqrt(nu), while linear coupling shifts it at first order, kappa max Re eig(M)",
+    "doubled_vs_real_form_max_abs_err": 2.4424906541753444e-14,
+    "uniform_frequency": [
+      {
+        "seed": 10,
+        "kappa": 0.1,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.001035961426156657,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.0010359614261555006,
+        "linear_onset_shift": -0.06692265368340108,
+        "linear_formula_-k_max_Re_eig(M)": -0.06692265368339965,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.133743939611956
+      },
+      {
+        "seed": 10,
+        "kappa": 0.3,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.00926926050170901,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.00926926050170676,
+        "linear_onset_shift": -0.2007679610501995,
+        "linear_formula_-k_max_Re_eig(M)": -0.20076796105019898,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.133743939611956
+      },
+      {
+        "seed": 10,
+        "kappa": 1.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.10121980076856685,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.10121980076856557,
+        "linear_onset_shift": -0.6692265368339991,
+        "linear_formula_-k_max_Re_eig(M)": -0.6692265368339966,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.133743939611956
+      },
+      {
+        "seed": 10,
+        "kappa": 3.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -2.4498665194995892,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -2.4498665194995857,
+        "linear_onset_shift": -2.0076796105019987,
+        "linear_formula_-k_max_Re_eig(M)": -2.00767961050199,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.133743939611956
+      },
+      {
+        "seed": 11,
+        "kappa": 0.1,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.0015977062949460632,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.001597706294945913,
+        "linear_onset_shift": -0.05971768161206442,
+        "linear_formula_-k_max_Re_eig(M)": -0.05971768161206512,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 2.1023615840512426
+      },
+      {
+        "seed": 11,
+        "kappa": 0.3,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.014177347560969665,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.01417734756096928,
+        "linear_onset_shift": -0.1791530448361948,
+        "linear_formula_-k_max_Re_eig(M)": -0.17915304483619535,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 2.1023615840512426
+      },
+      {
+        "seed": 11,
+        "kappa": 1.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.13643814576214244,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.136438145762142,
+        "linear_onset_shift": -0.5971768161206541,
+        "linear_formula_-k_max_Re_eig(M)": -0.5971768161206512,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 2.1023615840512426
+      },
+      {
+        "seed": 11,
+        "kappa": 3.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -1.0179557953023304,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -1.0179557953023213,
+        "linear_onset_shift": -1.7915304483619492,
+        "linear_formula_-k_max_Re_eig(M)": -1.7915304483619536,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 2.1023615840512426
+      },
+      {
+        "seed": 12,
+        "kappa": 0.1,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.0008525455942933451,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.0008525455942933865,
+        "linear_onset_shift": -0.06229595291850848,
+        "linear_formula_-k_max_Re_eig(M)": -0.06229595291850896,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.451800084163852
+      },
+      {
+        "seed": 12,
+        "kappa": 0.3,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.007665718235658997,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.007665718235656605,
+        "linear_onset_shift": -0.1868878587555266,
+        "linear_formula_-k_max_Re_eig(M)": -0.18688785875552685,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.451800084163852
+      },
+      {
+        "seed": 12,
+        "kappa": 1.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -0.08402131337929004,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -0.08402131337928948,
+        "linear_onset_shift": -0.6229595291850947,
+        "linear_formula_-k_max_Re_eig(M)": -0.6229595291850896,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.451800084163852
+      },
+      {
+        "seed": 12,
+        "kappa": 3.0,
+        "spectrum_formula_max_abs_err": 0.0,
+        "vortex_onset_shift": -1.8083168503668192,
+        "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": -1.8083168503668148,
+        "linear_onset_shift": -1.8688785875552765,
+        "linear_formula_-k_max_Re_eig(M)": -1.8688785875552687,
+        "threshold_kappa*_w/sqrt(max_real_nu)": 1.451800084163852
+      }
+    ]
+  },
+  "seconds": 71.5
 }

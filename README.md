@@ -31,6 +31,7 @@ Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. First layer test: **[GATE1.md]
 | §2 | Finite horizon | Update rank 4–7 while propagator rank grows with N (T = 1) | Measured; meaningless at long T, where everything collapses |
 | §3 | Vortex → Neuron | Co-rotating pair in strain: frozen = Adler/SNIC neuron, free = heteroclinic (log) onset | Verified; slope 20.03 vs 20.0 |
 | §4 | Neuron → Matrix | Stuart–Landau with shear keeps exactly $`-\beta\log(1+\rho_0/\sqrt\mu)`$ of a kick (Sol's sharpening); the phase is stored but the response change it leaves, $`2\mu\sqrt{1+\beta^2}\lvert\sin\Delta\varphi\rvert`$, shrinks toward onset (Sol) | Verified to ~1e-10. Optimum just *below* onset, where memory still fades: confirmed in Gate 1 |
+| §5b | Adding a dimension | Doubling z → (z, z̄) turns vortex coupling into an ordinary matrix; with one frequency $`\lambda^2=\kappa^2\nu-\omega^2`$, which is why vortex coupling cancelled in Gate 1 (second order in κ below a threshold, first order for ordinary coupling) | Exact, verified to 1e-14 |
 
 ## What this does not show
 

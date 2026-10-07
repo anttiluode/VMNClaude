@@ -317,6 +317,54 @@ def check_c5():
     }
 
 
+# ---------------------------------------------------------------------------
+# C6  Adding a dimension: the doubled (z, conj z) view of vortex coupling
+# ---------------------------------------------------------------------------
+
+def check_c6():
+    import gate1_layer as g1
+    n = g1.N
+    rows_equiv, rows_uniform = [], []
+    for seed in (10, 11, 12):
+        rng = np.random.default_rng(1000 + seed)
+        M, gg = g1.vortex_matrix(rng)
+        w = rng.uniform(0.5, 1.5, n)
+        # (a) doubled matrix [[A, B], [conj B, conj A]] has the real-form spectrum
+        for counter in (False, True):
+            ww = w * np.sign(gg) if counter else w
+            for kappa in (0.3, 1.0, 3.0):
+                for mode in ("vortex", "linear"):
+                    A = np.diag(1j * ww) + (kappa * M if mode == "linear" else 0)
+                    B = kappa * M if mode == "vortex" else np.zeros_like(M)
+                    D = np.block([[A, B], [np.conj(B), np.conj(A)]])
+                    shift_doubled = -float(np.max(np.linalg.eigvals(D).real))
+                    shift_real = g1.onset_mu(M, ww, kappa, mode)
+                    rows_equiv.append(abs(shift_doubled - shift_real))
+        # (b) uniform frequency: eig(D)^2 = -w^2 + kappa^2 eig(M conj M), exactly
+        nu = np.linalg.eigvals(M @ np.conj(M))
+        wu = 1.0
+        for kappa in (0.1, 0.3, 1.0, 3.0):
+            D = np.block([[1j * wu * np.eye(n), kappa * M], [kappa * np.conj(M), -1j * wu * np.eye(n)]])
+            ev = np.linalg.eigvals(D)
+            pred = np.concatenate([np.sqrt((kappa ** 2 * nu - wu ** 2).astype(complex)),
+                                   -np.sqrt((kappa ** 2 * nu - wu ** 2).astype(complex))])
+            err = float(np.max(np.abs(np.sort_complex(np.round(ev, 9)) - np.sort_complex(np.round(pred, 9)))))
+            rows_uniform.append({
+                "seed": seed, "kappa": kappa,
+                "spectrum_formula_max_abs_err": err,
+                "vortex_onset_shift": float(-np.max(ev.real)),
+                "vortex_shift_formula_-max_Re_sqrt(k^2 nu - w^2)": float(-np.max(pred.real)),
+                "linear_onset_shift": g1.onset_mu(M, np.full(n, wu), kappa, "linear"),
+                "linear_formula_-k_max_Re_eig(M)": float(-kappa * np.max(np.linalg.eigvals(M).real)),
+                "threshold_kappa*_w/sqrt(max_real_nu)": float(wu / np.sqrt(np.max(nu.real))),
+            })
+    return {
+        "claim": "Doubling z -> (z, conj z) turns the antilinear vortex coupling into an ordinary linear matrix with the same spectrum. With one common frequency w, D^2 is block diagonal and eig(D)^2 = -w^2 + kappa^2 eig(M conj M): vortex coupling only shifts the onset through complex eigenvalues of M conj M (second order) until kappa reaches w/sqrt(nu), while linear coupling shifts it at first order, kappa max Re eig(M)",
+        "doubled_vs_real_form_max_abs_err": float(max(rows_equiv)),
+        "uniform_frequency": rows_uniform,
+    }
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true")
@@ -330,6 +378,7 @@ def main():
     out["C3b_update_rank_vs_horizon"] = check_c3b(rng)
     out["C4_vortex_pair_as_neuron"] = check_c4()
     out["C5_memory_near_hopf"] = check_c5()
+    out["C6_doubled_view"] = check_c6()
     out["seconds"] = round(time.time() - t0, 1)
     os.makedirs("results", exist_ok=True)
     with open("results/receipt.json", "w") as f:
