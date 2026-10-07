@@ -19,7 +19,11 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 - **The hexagon–vortex-lattice look-alike.** Grid hexagons resemble the hexagonal vortex lattices of superconductors and rotating superfluids, and the analogy has been drawn ([Chalyi, Ukr. J. Phys. 2022](https://ujp.bitp.kiev.ua/index.php/uik/en/article/view/2022537)). But hexagons appear whenever repelling objects pack in 2D, so the shared shape is not evidence of a shared mechanism.
 - **AI cousin:** rotary position embeddings (RoPE) in transformers encode position by rotating vectors by angles proportional to position, which is the Gao et al. picture. The grid-cell resemblance has, I believe, been pointed out by others; not checked.
 
-## Latest: Gate 4 — ping the memory with a goal, listen for the vector to it
+## Does anyone need this? — [NEEDS.md](NEEDS.md)
+
+An honest market check after Gate 4: **almost nothing needs ping-queryable oscillator memory more than a digital register, and where it is needed, it already exists.** VCO-based ADCs use oscillator phase as an integrator; passive SAW tags are read by ping; frequency-multiplexed resonator arrays are read on one wire; oscillatory associative memory is a funded hardware field. A register has no drift, holds state at zero power, and already has exponential range (binary is a modular code). The one open question is whether physical similarity search beats digital at large N, which needs hardware numbers, not simulation.
+
+## Latest gate: Gate 4 — ping the memory with a goal, listen for the vector to it
 
 ![gate 4](results/gate4_summary.png)
 
