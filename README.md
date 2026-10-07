@@ -19,7 +19,21 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 - **The hexagon–vortex-lattice look-alike.** Grid hexagons resemble the hexagonal vortex lattices of superconductors and rotating superfluids, and the analogy has been drawn ([Chalyi, Ukr. J. Phys. 2022](https://ujp.bitp.kiev.ua/index.php/uik/en/article/view/2022537)). But hexagons appear whenever repelling objects pack in 2D, so the shared shape is not evidence of a shared mechanism.
 - **AI cousin:** rotary position embeddings (RoPE) in transformers encode position by rotating vectors by angles proportional to position, which is the Gao et al. picture. The grid-cell resemblance has, I believe, been pointed out by others; not checked.
 
-## Latest: Gate 2 — path integration, the entorhinal setting
+## Latest: Gate 3 — memory vs control, and event-gated coupling
+
+![gate 3](results/gate3_summary.png)
+
+Full write-up: **[GATE3.md](GATE3.md)**. Gate 1 (coupling helps) and Gate 2 (coupling hurts) are two ends of one trade-off, fixed by symmetry. An uncoupled bank's phases are perfect integrators, but the response operator cannot see what they store. Coupling lets the operator see the stored state (control) and makes the phases drift. Kill conditions were written before running, and all three pass.
+
+- **The trade-off is real.** Control is exactly 0 without coupling and grows linearly with κ. No coupling strength lowers path-integration error; past κ ≈ 0.01, error climbs to chance by κ = 0.3.
+- **Global phase:** rotating all phases together leaves the operator's singular values untouched under linear coupling (4×10⁻¹⁶) and changes them by 3.8% under vortex coupling.
+- **Event gating wins:** coupling switched on only 10% of the time gives **7–9× more control** than steady coupling at the same error. That is close to the expected ~10×, so this confirms the scaling rather than surprising.
+- **Not pre-registered:** vortex coupling beats linear on *both* axes at every κ ≥ 0.01, with more control and less error.
+- **Not shown:** that the control is *useful*. That needs a task where the answer must depend on stored position, which is the next gate.
+
+Design rule: keep the integrator symmetric, and break the symmetry briefly, only when a state-dependent response is needed.
+
+## Gate 2 — path integration, the entorhinal setting
 
 ![gate 2](results/gate2_summary.png)
 
