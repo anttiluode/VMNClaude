@@ -1,0 +1,286 @@
+{
+  "python_numpy": "2.5.3",
+  "C1_vortex_to_matrix": {
+    "claim": "K (real 2N x 2N tangent) equals the antilinear map dz -> M conj(dz); diag(Gamma) M is complex symmetric; spec(K)^2 = spec(M conj M) U conj",
+    "jacobian_vs_finite_difference_rel_err": 2.8590624021571185e-10,
+    "antilinear_form_rel_err": 3.0424515481249254e-16,
+    "gamma_weighted_symmetry_rel_err": 1.0715841223668528e-16,
+    "trace_K": 0.0,
+    "spectrum_squared_match_max_abs_err": 0.0
+  },
+  "C2_event_tidal_update": {
+    "claim": "Adding a vortex g at w changes the old-old response block by a block-diagonal update; block k is a pure strain with both singular values |g|/(2 pi r_k^2); its effective rank saturates with N at fixed density",
+    "exactness": {
+      "off_block_diagonal_norm": 0.0,
+      "singular_values_vs_|g|/(2 pi r^2)_max_rel_err": 1.0554353682659664e-14,
+      "update_independent_of_own_circulation": true
+    },
+    "rank_vs_N_fixed_density": [
+      {
+        "N": 25,
+        "median_participation_rank": 6.132974072373038,
+        "median_95pct_energy_rank": 16.0,
+        "out_of": 50
+      },
+      {
+        "N": 100,
+        "median_participation_rank": 4.678110960610907,
+        "median_95pct_energy_rank": 16.0,
+        "out_of": 200
+      },
+      {
+        "N": 400,
+        "median_participation_rank": 5.819898225884536,
+        "median_95pct_energy_rank": 24.5,
+        "out_of": 800
+      },
+      {
+        "N": 1600,
+        "median_participation_rank": 5.813271916249161,
+        "median_95pct_energy_rank": 26.5,
+        "out_of": 3200
+      },
+      {
+        "N": 6400,
+        "median_participation_rank": 5.671748095009388,
+        "median_95pct_energy_rank": 25.5,
+        "out_of": 12800
+      }
+    ]
+  },
+  "C3_finite_horizon_update_rank": {
+    "claim": "Over a finite horizon the event (finite kick to one vortex) changes the propagator by an update whose effective rank stays small and roughly N-independent, while the propagator itself is full rank",
+    "setup": {
+      "T": 1.0,
+      "dt": 0.01,
+      "smoothing_delta": 0.05,
+      "kick": 0.25,
+      "density": 1.0,
+      "min_spacing": 0.45
+    },
+    "rows": [
+      {
+        "N": 16,
+        "dim": 32,
+        "propagator_95pct_rank": 25.0,
+        "update_participation_rank": 2.5499303942974514,
+        "update_95pct_rank": 5.0,
+        "update_rel_norm": 0.08786077457933361
+      },
+      {
+        "N": 36,
+        "dim": 72,
+        "propagator_95pct_rank": 55.5,
+        "update_participation_rank": 3.728995159437042,
+        "update_95pct_rank": 7.0,
+        "update_rel_norm": 0.0432545020932919
+      },
+      {
+        "N": 64,
+        "dim": 128,
+        "propagator_95pct_rank": 93.0,
+        "update_participation_rank": 2.300609368997643,
+        "update_95pct_rank": 4.0,
+        "update_rel_norm": 0.059745587440223374
+      },
+      {
+        "N": 100,
+        "dim": 200,
+        "propagator_95pct_rank": 144.5,
+        "update_participation_rank": 2.3246915771579677,
+        "update_95pct_rank": 4.5,
+        "update_rel_norm": 0.05980264702627645
+      }
+    ]
+  },
+  "C3b_update_rank_vs_horizon": {
+    "claim": "update rank vs horizon and kick size (N=64)",
+    "rows": [
+      {
+        "T": 0.5,
+        "kick": 0.01,
+        "update_95pct_rank": 5.5,
+        "update_participation_rank": 2.8669662738453408,
+        "propagator_participation_rank": 95.99563323092002,
+        "dim": 128
+      },
+      {
+        "T": 0.5,
+        "kick": 0.25,
+        "update_95pct_rank": 5.5,
+        "update_participation_rank": 2.587504430009123,
+        "propagator_participation_rank": 95.99563323092002,
+        "dim": 128
+      },
+      {
+        "T": 1.0,
+        "kick": 0.01,
+        "update_95pct_rank": 4.5,
+        "update_participation_rank": 2.7173942807897755,
+        "propagator_participation_rank": 50.990724784979506,
+        "dim": 128
+      },
+      {
+        "T": 1.0,
+        "kick": 0.25,
+        "update_95pct_rank": 4.5,
+        "update_participation_rank": 2.565446082223164,
+        "propagator_participation_rank": 50.990724784979506,
+        "dim": 128
+      },
+      {
+        "T": 2.0,
+        "kick": 0.01,
+        "update_95pct_rank": 5.0,
+        "update_participation_rank": 2.081744492334905,
+        "propagator_participation_rank": 22.891640767981634,
+        "dim": 128
+      },
+      {
+        "T": 2.0,
+        "kick": 0.25,
+        "update_95pct_rank": 4.0,
+        "update_participation_rank": 1.5259206213659646,
+        "propagator_participation_rank": 22.891640767981634,
+        "dim": 128
+      },
+      {
+        "T": 4.0,
+        "kick": 0.01,
+        "update_95pct_rank": 2.5,
+        "update_participation_rank": 1.6035567133964954,
+        "propagator_participation_rank": 5.5787091416234915,
+        "dim": 128
+      },
+      {
+        "T": 4.0,
+        "kick": 0.25,
+        "update_95pct_rank": 4.0,
+        "update_participation_rank": 1.4602302308677877,
+        "propagator_participation_rank": 5.5787091416234915,
+        "dim": 128
+      }
+    ]
+  },
+  "C4_vortex_pair_as_neuron": {
+    "claim": "Relative coordinate of a co-rotating pair in strain: dz/dt = i G/(2 pi conj z) + e conj z. Frozen separation -> Adler (SNIC-type, period ~ (a^2-e^2)^-1/2). Free separation -> heteroclinic loop through two saddles at r_s = sqrt(G/(2 pi e)), period ~ (2/lambda) log(1/dH) with lambda = 2e",
+    "frozen_separation_adler": [
+      {
+        "drive_over_threshold": 2.0,
+        "period_measured": 22.792,
+        "period_predicted_pi/sqrt(a^2-e^2)": 22.792875031056223
+      },
+      {
+        "drive_over_threshold": 1.2,
+        "period_measured": 35.71000000000001,
+        "period_predicted_pi/sqrt(a^2-e^2)": 35.70957232107679
+      },
+      {
+        "drive_over_threshold": 1.05,
+        "period_measured": 64.73799999999999,
+        "period_predicted_pi/sqrt(a^2-e^2)": 64.73767640215965
+      },
+      {
+        "drive_over_threshold": 1.01,
+        "period_measured": 140.622,
+        "period_predicted_pi/sqrt(a^2-e^2)": 140.6219403302553
+      },
+      {
+        "drive_over_threshold": 1.002,
+        "period_measured": 312.572,
+        "period_predicted_pi/sqrt(a^2-e^2)": 312.5722566365807
+      }
+    ],
+    "free_pair": {
+      "strain_e": 0.05,
+      "saddle_radius": 1.7841241161527712,
+      "saddle_eigenvalue_2e": 0.1,
+      "period_table": [
+        {
+          "H_minus_Hs": 0.1,
+          "start_r": 0.5773013218855111,
+          "period": 13.5
+        },
+        {
+          "H_minus_Hs": 0.01,
+          "start_r": 1.016225984894485,
+          "period": 61.64
+        },
+        {
+          "H_minus_Hs": 0.001,
+          "start_r": 1.0753480947828966,
+          "period": 108.94000000000001
+        },
+        {
+          "H_minus_Hs": 0.0001,
+          "start_r": 1.0814462709337023,
+          "period": 155.21
+        },
+        {
+          "H_minus_Hs": 1e-05,
+          "start_r": 1.082057987334942,
+          "period": 201.29000000000002
+        },
+        {
+          "H_minus_Hs": 1e-06,
+          "start_r": 1.082119178002679,
+          "period": 247.35
+        }
+      ],
+      "fitted_dPeriod/dlog(1/dH)": 20.03443874467891,
+      "predicted_2/lambda": 20.0,
+      "escape_side_final_radius_vs_saddle": 49523635.49907614
+    }
+  },
+  "C5_memory_near_hopf": {
+    "claim": "Stuart-Landau with shear beta: an amplitude kick rho0 leaves a permanent phase shift -beta rho0/sqrt(mu) after relaxing in 1/(2mu); memory diverges at the Hopf onset from both sides. A Hamiltonian vortex is the mu -> 0 limit: the kick is stored as a frequency shift and the phase error grows linearly forever",
+    "above_onset": [
+      {
+        "mu": 0.4,
+        "phase_shift": -3.162252657842053e-05,
+        "predicted_-beta*rho0/sqrt(mu)": -3.1622776601683795e-05,
+        "relaxation_time_1/(2mu)": 1.25
+      },
+      {
+        "mu": 0.1,
+        "phase_shift": -6.324455324875548e-05,
+        "predicted_-beta*rho0/sqrt(mu)": -6.324555320336759e-05,
+        "relaxation_time_1/(2mu)": 5.0
+      },
+      {
+        "mu": 0.025,
+        "phase_shift": -0.00012648710657313202,
+        "predicted_-beta*rho0/sqrt(mu)": -0.00012649110640673518,
+        "relaxation_time_1/(2mu)": 20.0
+      },
+      {
+        "mu": 0.00625,
+        "phase_shift": -0.00025296621429449375,
+        "predicted_-beta*rho0/sqrt(mu)": -0.00025298221281347036,
+        "relaxation_time_1/(2mu)": 80.0
+      }
+    ],
+    "below_onset": [
+      {
+        "mu": -0.4,
+        "decay_rate_measured": 0.40000000197841407,
+        "predicted_|mu|": 0.4
+      },
+      {
+        "mu": -0.1,
+        "decay_rate_measured": 0.10000000197810284,
+        "predicted_|mu|": 0.1
+      },
+      {
+        "mu": -0.025,
+        "decay_rate_measured": 0.025000001978044244,
+        "predicted_|mu|": 0.025
+      }
+    ],
+    "hamiltonian_vortex": {
+      "phase_drift_slope": -3.182621460599662e-05,
+      "predicted_-2G dr/(2 pi r^3)": -3.183098861837907e-05
+    }
+  },
+  "seconds": 67.6
+}
