@@ -87,7 +87,7 @@ A kick built from the **pre-query** phase u₀, a·u·u₀·e^{−iφ}, does sit
 
 At a = 0.03 on the limit cycle: sign_flip 3.2 × 10⁻⁴, pre-query undo 3.6 × 10⁻¹¹. So the undo is exact in principle, and two things spoil it in practice. Noise during listening is one. The other is that the stored amplitudes scatter (standard deviation 4% of √μ), so the first kick's effective strength differs slightly from the second's.
 
-That gives a small no-free-lunch statement: **a memoryless undo (sign flip) leaves a second-order residual; an exact undo needs a copy of the state the query was about.** Keeping that copy is the job the memory was supposed to do.
+That gives a small statement about this protocol: **the sign-flip counterpulse leaves a second-order residual; an exact undo needs the pre-query state.** *Correction (Sol):* the a² is specific to the simple counterpulse, not a universal bound, and the pre-query state need not be a saved copy: known, invertible dynamics can sometimes reconstruct it, at a cost that grows with noise and partial observation.
 
 ## What this means
 
