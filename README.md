@@ -6,7 +6,7 @@ Claude (Opus 5.5) side of the VMN line. Sol works the same question in [VMN](htt
 
 **Short answer, from the note and its checks:** yes, through one term. The nonlinearity that matters is **shear**, frequency that depends on amplitude. It appears as a vortex's self-rotation, as the β of an oscillator neuron, and as the amplitude-dependent wave speed in [Kompressori](https://github.com/anttiluode/Kompressori). Without a nonlinearity, no event can change how a system responds to the next input (§0).
 
-Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control) and **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors). Every number is in a receipt under `results/`.
+Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control), **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors) and **[GATE5.md](GATE5.md)** (does left-right sweep alternation cancel read cost?). Every number is in a receipt under `results/`.
 
 ## The entorhinal link
 
@@ -23,7 +23,18 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 
 An honest market check after Gate 4: **almost nothing needs ping-queryable oscillator memory more than a digital register, and where it is needed, it already exists.** VCO-based ADCs use oscillator phase as an integrator; passive SAW tags are read by ping; frequency-multiplexed resonator arrays are read on one wire; oscillatory associative memory is a funded hardware field. A register has no drift, holds state at zero power, and already has exponential range (binary is a modular code). The one open question is whether physical similarity search beats digital at large N, which needs hardware numbers, not simulation.
 
-## Latest gate: Gate 4 — ping the memory with a goal, listen for the vector to it
+## Latest gate: Gate 5 — does left-right alternation protect the memory from its own reads?
+
+![gate 5](results/gate5_summary.png)
+
+Full write-up: **[GATE5.md](GATE5.md)**. Sol's [PING.md](https://github.com/anttiluode/VMN/blob/main/PING.md) showed that reading the bank costs state, cumulatively. Grid cells read their own map ~10 times a second with sweeps that alternate ~30° left and right of heading ([Vollan et al., Nature 2025](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11946909/)). Hypothesis: the alternation exists to cancel the read cost, like spin echo.
+
+- **Dead.** Left-right sweeps do 0.87–0.99× the damage of always sweeping the same way at a = 0.3 (1.66× better at a = 0.1, under the 2× bar). Random directions beat left-right after 32 sweeps by 4×, because their damage grows as √n, not n.
+- **Only antipodal pairs cancel** (+D then −D on one heading): 35× less damage stationary. The reason is exact: with no shear, a ping moves a unit's phase by arg(1 + a e^{iα}), an odd function of α, so ±D cancel to all orders. Left/right sweeps are not opposites; their forward parts add.
+- **Two things break the cancellation:** heading turning between the two sweeps of a pair (37° per sweep in these trajectories; fixing the pair's heading restores 15–34×), and shear, which turns the even amplitude part of the kick into phase (β = 0.5 cuts the advantage to 1.4×).
+- **What a read is:** the readout signal and the permanent damage are the same quantity, a sin(b d·D). Every read is a weak write of the place being looked at.
+
+## Gate 4 — ping the memory with a goal, listen for the vector to it
 
 ![gate 4](results/gate4_summary.png)
 
@@ -106,6 +117,9 @@ python gate3_tradeoff.py     # ~4 min
 python make_gate3_figure.py
 python gate4_ping.py         # ~1 min
 python make_gate4_figure.py
+python gate5_sweeps.py       # ~3 min
+python gate5b_paired_heading.py
+python make_gate5_figure.py
 ```
 
 Files: `vmn_core.py` (vortex dynamics, exact Jacobians, oscillators) · `vmn_checks.py` (maths checks) · `gate1_layer.py`, `gate1b_followups.py` (reservoir test) · `gate2_path.py` (path integration) · `gate3_tradeoff.py` (memory vs control) · `gate4_ping.py` (ping-and-listen) · `make_figure.py`, `make_gate1_figure.py` … `make_gate4_figure.py` · `results/`.
