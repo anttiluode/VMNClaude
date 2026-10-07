@@ -1,0 +1,90 @@
+{
+  "sigma0.05_window16_a0.03": {
+    "single": 0.021390051222690498,
+    "sign_flip": 0.0022474397822864144,
+    "conjugate_current": 0.0022402676900420706,
+    "conjugate_prequery": 0.0015249088330344248
+  },
+  "sigma0.05_window16_a0.1": {
+    "single": 0.07112163730937511,
+    "sign_flip": 0.008350866018613259,
+    "conjugate_current": 0.00815211631765297,
+    "conjugate_prequery": 0.0050718446896934385
+  },
+  "sigma0.05_window16_a0.3": {
+    "single": 0.2132298454758673,
+    "sign_flip": 0.04174278980896393,
+    "conjugate_current": 0.038772315881727124,
+    "conjugate_prequery": 0.015825458252083185
+  },
+  "sigma0.05_window64_a0.03": {
+    "single": 0.021390052295105422,
+    "sign_flip": 0.004277836576089352,
+    "conjugate_current": 0.004237289847445887,
+    "conjugate_prequery": 0.0015122158892818054
+  },
+  "sigma0.05_window64_a0.1": {
+    "single": 0.07112164111300394,
+    "sign_flip": 0.01490038580331438,
+    "conjugate_current": 0.014405980648433691,
+    "conjugate_prequery": 0.005034714885775094
+  },
+  "sigma0.05_window64_a0.3": {
+    "single": 0.21322986373855732,
+    "sign_flip": 0.05778969699971899,
+    "conjugate_current": 0.051402085496899515,
+    "conjugate_prequery": 0.015692779739581813
+  },
+  "sigma0_window16_a0.03": {
+    "single": 0.021382305733148185,
+    "sign_flip": 0.0008916133815768987,
+    "conjugate_current": 0.0008979273847841549,
+    "conjugate_prequery": 0.0008345758107200578
+  },
+  "sigma0_window16_a0.1": {
+    "single": 0.0710930362816586,
+    "sign_flip": 0.004470713735506322,
+    "conjugate_current": 0.004565714671181142,
+    "conjugate_prequery": 0.002775069586742472
+  },
+  "sigma0_window16_a0.3": {
+    "single": 0.2131127099923155,
+    "sign_flip": 0.034360754283591116,
+    "conjugate_current": 0.033361620462054854,
+    "conjugate_prequery": 0.0084824078034502
+  },
+  "sigma0_window64_a0.03": {
+    "single": 0.02138230573314819,
+    "sign_flip": 0.0009083863022238713,
+    "conjugate_current": 0.0009105059177473336,
+    "conjugate_prequery": 0.0008502644879931528
+  },
+  "sigma0_window64_a0.1": {
+    "single": 0.0710930362816586,
+    "sign_flip": 0.004554700834218697,
+    "conjugate_current": 0.004548505734950427,
+    "conjugate_prequery": 0.002827932664689398
+  },
+  "sigma0_window64_a0.3": {
+    "single": 0.2131127099923155,
+    "sign_flip": 0.03501902723791463,
+    "conjugate_current": 0.0327787498432401,
+    "conjugate_prequery": 0.008669570614919199
+  },
+  "end_amplitude_over_sqrt_mu_mean_sd": [
+    0.9993177309479429,
+    0.03969402394150066
+  ],
+  "on_limit_cycle_sigma0_window64_a0.03": {
+    "single": 0.021309367162317315,
+    "sign_flip": 0.0003196590978798921,
+    "conjugate_current": 0.0003182805216927216,
+    "conjugate_prequery": 3.569529904041569e-11
+  },
+  "on_limit_cycle_sigma0_window64_a0.3": {
+    "single": 0.21237538282858434,
+    "sign_flip": 0.03405635789128858,
+    "conjugate_current": 0.03131232050579868,
+    "conjugate_prequery": 4.767961712857097e-09
+  }
+}

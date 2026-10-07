@@ -1,0 +1,114 @@
+{
+  "phase_disturbance_rms": {
+    "0.0225": {
+      "single": 0.13474758870230194,
+      "repeat": 0.24983961073983518,
+      "sign_flip": 0.03959691682091598,
+      "conjugate": null,
+      "single_over_sign_flip": 3.4029818359778266,
+      "single_over_conjugate": null,
+      "repeat_over_sign_flip": 6.309572330335182
+    },
+    "0.025": {
+      "single": 0.10841633527484952,
+      "repeat": 0.19873577254752106,
+      "sign_flip": 0.020580495610282197,
+      "conjugate": null,
+      "single_over_sign_flip": 5.267916639513956,
+      "single_over_conjugate": null,
+      "repeat_over_sign_flip": 9.656510528746981
+    },
+    "0.03": {
+      "single": 0.0744208048607937,
+      "repeat": 0.13891368805265453,
+      "sign_flip": 0.015007493540584298,
+      "conjugate": 0.016145581168043637,
+      "single_over_sign_flip": 4.958909671327849,
+      "single_over_conjugate": 4.609360548017441,
+      "repeat_over_sign_flip": 9.2562883786686
+    },
+    "0.04": {
+      "single": 0.0599622832395266,
+      "repeat": 0.1175503131938701,
+      "sign_flip": 0.009118117976978275,
+      "conjugate": 0.009605506447597756,
+      "single_over_sign_flip": 6.576168831212905,
+      "single_over_conjugate": 6.242490551294418,
+      "repeat_over_sign_flip": 12.891949138041975
+    },
+    "0.06": {
+      "single": 0.046399581761053854,
+      "repeat": 0.09289895483672689,
+      "sign_flip": 0.006340410635587959,
+      "conjugate": 0.006383297184500351,
+      "single_over_sign_flip": 7.31807203473835,
+      "single_over_conjugate": 7.2689051472833395,
+      "repeat_over_sign_flip": 14.651883005068516
+    },
+    "0.1": {
+      "single": 0.032284563978747155,
+      "repeat": 0.06729377623665497,
+      "sign_flip": 0.004293276678867149,
+      "conjugate": 0.004269533747440823,
+      "single_over_sign_flip": 7.519795809494851,
+      "single_over_conjugate": 7.561613489552264,
+      "repeat_over_sign_flip": 15.674223039921
+    }
+  },
+  "position_shift": {
+    "0.0225": {
+      "single": 0.003514913480487353,
+      "repeat": 0.006488986689625242,
+      "sign_flip": 0.0007442001219799785,
+      "conjugate": null,
+      "single_over_sign_flip": 4.723075657574155,
+      "single_over_conjugate": null,
+      "repeat_over_sign_flip": 8.719410946024835
+    },
+    "0.025": {
+      "single": 0.0028315578767516177,
+      "repeat": 0.005173410140485205,
+      "sign_flip": 0.00036916632977894545,
+      "conjugate": null,
+      "single_over_sign_flip": 7.670141202874968,
+      "single_over_conjugate": null,
+      "repeat_over_sign_flip": 14.01376486198785
+    },
+    "0.03": {
+      "single": 0.0019478453815458226,
+      "repeat": 0.0036286902022882187,
+      "sign_flip": 0.00026546835792726073,
+      "conjugate": 0.0003104410005255752,
+      "single_over_sign_flip": 7.337391908980501,
+      "single_over_conjugate": 6.274446282057233,
+      "repeat_over_sign_flip": 13.669012121145123
+    },
+    "0.04": {
+      "single": 0.0015704245045806858,
+      "repeat": 0.003072483170381073,
+      "sign_flip": 0.00015777755482661136,
+      "conjugate": 0.00017662607461889398,
+      "single_over_sign_flip": 9.953408812213459,
+      "single_over_conjugate": 8.89123821592701,
+      "repeat_over_sign_flip": 19.473512400148163
+    },
+    "0.06": {
+      "single": 0.0012158914799104362,
+      "repeat": 0.0024302123754457445,
+      "sign_flip": 0.00010901089006766713,
+      "conjugate": 0.00011446179459237999,
+      "single_over_sign_flip": 11.153853336631661,
+      "single_over_conjugate": 10.622684051394222,
+      "repeat_over_sign_flip": 22.293299081745147
+    },
+    "0.1": {
+      "single": 0.000846583445861499,
+      "repeat": 0.0017622519028262834,
+      "sign_flip": 7.358163053215962e-05,
+      "conjugate": 7.515513506007216e-05,
+      "single_over_sign_flip": 11.505364039078897,
+      "single_over_conjugate": 11.264479069657948,
+      "repeat_over_sign_flip": 23.949617453177705
+    }
+  }
+}

@@ -6,7 +6,7 @@ Claude (Opus 5.5) side of the VMN line. Sol works the same question in [VMN](htt
 
 **Short answer, from the note and its checks:** yes, through one term. The nonlinearity that matters is **shear**, frequency that depends on amplitude. It appears as a vortex's self-rotation, as the β of an oscillator neuron, and as the amplitude-dependent wave speed in [Kompressori](https://github.com/anttiluode/Kompressori). Without a nonlinearity, no event can change how a system responds to the next input (§0).
 
-Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control), **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors) and **[GATE5.md](GATE5.md)** (does left-right sweep alternation cancel read cost?). Every number is in a receipt under `results/`.
+Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control), **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors) **[GATE5.md](GATE5.md)** (does left-right sweep alternation cancel read cost?) and **[GATE6.md](GATE6.md)** (read the goal, listen, then restore the memory). Every number is in a receipt under `results/`.
 
 ## The entorhinal link
 
@@ -23,7 +23,17 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 
 An honest market check after Gate 4: **almost nothing needs ping-queryable oscillator memory more than a digital register, and where it is needed, it already exists.** VCO-based ADCs use oscillator phase as an integrator; passive SAW tags are read by ping; frequency-multiplexed resonator arrays are read on one wire; oscillatory associative memory is a funded hardware field. A register has no drift, holds state at zero power, and already has exponential range (binary is a modular code). The one open question is whether physical similarity search beats digital at large N, which needs hardware numbers, not simulation.
 
-## Latest gate: Gate 5 — does left-right alternation protect the memory from its own reads?
+## Latest gate: Gate 6 — read the goal, listen, then restore the memory
+
+![gate 6](results/gate6_summary.png)
+
+Full write-up: **[GATE6.md](GATE6.md)**. Built to Sol's three conditions: damage measured against an unqueried control, every pulse and the full listening time counted, answers read from one bank, and schemes compared at **matched answer accuracy** (otherwise a weaker query wins by default).
+
+- **Undo works.** Ping, listen, then send the same ping with its sign flipped. It answers about as well as a single ping and leaves **3–7× less phase damage** (5–11× less position shift) at matched accuracy. Pinging twice without the undo is worse than once, so the benefit is the undo, not the second look.
+- **But the headline is post hoc.** The pre-registered matching point sat on the memory's own error floor (~0.021), which the pair schemes approach but never reach, so K1 and K2 returned no comparison. The matched ratios come from a script written after that verdict, and are labelled so.
+- **Exact undo needs the pre-query state.** The phase-conjugate kick was no better than the sign flip (K3 fails), because it took its reference from a phase the first ping had already moved. Built from the pre-query phase, the undo is exact on the limit cycle (residual 5×10⁻⁹ vs 0.034), and noise plus 4% amplitude scatter spoil it in practice. A memoryless undo leaves a second-order residual; an exact one needs a copy of what the memory holds.
+
+## Gate 5 — does left-right alternation protect the memory from its own reads?
 
 ![gate 5](results/gate5_summary.png)
 
@@ -120,6 +130,10 @@ python make_gate4_figure.py
 python gate5_sweeps.py       # ~3 min
 python gate5b_paired_heading.py
 python make_gate5_figure.py
+python gate6_restore.py      # ~1.5 min
+python gate6_matched.py
+python gate6b_undo.py
+python make_gate6_figure.py
 ```
 
 Files: `vmn_core.py` (vortex dynamics, exact Jacobians, oscillators) · `vmn_checks.py` (maths checks) · `gate1_layer.py`, `gate1b_followups.py` (reservoir test) · `gate2_path.py` (path integration) · `gate3_tradeoff.py` (memory vs control) · `gate4_ping.py` (ping-and-listen) · `make_figure.py`, `make_gate1_figure.py` … `make_gate4_figure.py` · `results/`.
