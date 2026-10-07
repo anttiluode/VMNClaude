@@ -6,7 +6,7 @@ Claude (Opus 5.5) side of the VMN line. Sol works the same question in [VMN](htt
 
 **Short answer, from the note and its checks:** yes, through one term. The nonlinearity that matters is **shear**, frequency that depends on amplitude. It appears as a vortex's self-rotation, as the β of an oscillator neuron, and as the amplitude-dependent wave speed in [Kompressori](https://github.com/anttiluode/Kompressori). Without a nonlinearity, no event can change how a system responds to the next input (§0).
 
-Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control), **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors) **[GATE5.md](GATE5.md)** (does left-right sweep alternation cancel read cost?) and **[GATE6.md](GATE6.md)** (read the goal, listen, then restore the memory). Every number is in a receipt under `results/`.
+Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control), **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors) **[GATE5.md](GATE5.md)** (does left-right sweep alternation cancel read cost?) **[GATE6.md](GATE6.md)** (read the goal, listen, then restore the memory) and **[GATE7_8.md](GATE7_8.md)** (can the answer undo the read; can one wire do the reading). Every number is in a receipt under `results/`.
 
 ## The entorhinal link
 
@@ -23,7 +23,18 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 
 An honest market check after Gate 4: **almost nothing needs ping-queryable oscillator memory more than a digital register, and where it is needed, it already exists.** VCO-based ADCs use oscillator phase as an integrator; passive SAW tags are read by ping; frequency-multiplexed resonator arrays are read on one wire; oscillatory associative memory is a funded hardware field. A register has no drift, holds state at zero power, and already has exponential range (binary is a modular code). The one open question is whether physical similarity search beats digital at large N, which needs hardware numbers, not simulation.
 
-## Latest gate: Gate 6 — read the goal, listen, then restore the memory
+## Latest: Gates 7 and 8 — can the answer undo the read, and can one wire do the reading?
+
+![gates 7 and 8](results/gate78_summary.png)
+
+Full write-up: **[GATE7_8.md](GATE7_8.md)**. Both answer Sol's review: reconstruction might replace a saved copy, and every result so far read every unit.
+
+- **Gate 7: the answer cannot undo the read** (failed, as predicted in advance). An undo built from the 2-number decoded answer removes a third of the damage; the memoryless sign flip removes 85%. Even the *true* answer does no better. The read damages each unit by its own stored phase, and the bank's per-unit drift is exactly what a 2-number answer averages away. **The answer is compressed; the damage is not.**
+- **Gate 8: summed channels carry nothing** (1–4 channels: 0.22–0.24, against 0.235 for answering zero, matching Sol's four-channel result). **One frequency-multiplexed wire carries a lot** (0.124 noise-free), but its prediction failed: 6× worse than reading every unit (0.022).
+- **Gate 8b (post hoc): the wire isn't lossy, the window is.** With perfect demodulation over short windows, the error is 0.027, within 1.2× of every-unit reading. A one-wire listener needs about (units) × (1 / relaxation time) samples per unit time. For physical resonators that's cheap.
+- **The undo works through any interface**, because it needs no readout (wire protocol: 0.141 → 0.030).
+
+## Gate 6 — read the goal, listen, then restore the memory
 
 ![gate 6](results/gate6_summary.png)
 
@@ -134,6 +145,10 @@ python gate6_restore.py      # ~1.5 min
 python gate6_matched.py
 python gate6b_undo.py
 python make_gate6_figure.py
+python gate7_answer_undo.py   # ~30 s
+python gate8_one_wire.py      # ~40 s
+python gate8b_windows.py
+python make_gate78_figure.py
 ```
 
 Files: `vmn_core.py` (vortex dynamics, exact Jacobians, oscillators) · `vmn_checks.py` (maths checks) · `gate1_layer.py`, `gate1b_followups.py` (reservoir test) · `gate2_path.py` (path integration) · `gate3_tradeoff.py` (memory vs control) · `gate4_ping.py` (ping-and-listen) · `make_figure.py`, `make_gate1_figure.py` … `make_gate4_figure.py` · `results/`.
