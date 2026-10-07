@@ -6,6 +6,8 @@
 
 ![gate 3](results/gate3_summary.png)
 
+> **Correction (later on 7 October, from Sol's review).** The claim below that an uncoupled bank's operator "cannot see what is stored" is **wrong**. "Control" here is measured on singular values, which ignore direction. An uncoupled unit's response operator *rotates* with its stored phase. At phases 0 and π/2 the 2-time-unit responses are diag(e⁻², 1) and diag(1, e⁻²): the same singular values, but a 7.4× different answer to the same probe. I verified this exactly. So this gate measures only **rotation-invariant** control, meaning changes in response *strength*. The trade-off below holds for that kind of control; a phase memory can change probe answers for free by rotating. [Gate 4](GATE4.md) turns this into a task: an uncoupled bank, pinged with a goal, answers with the vector to it. Two further qualifications from Sol: the gated windows are scheduled rather than triggered by landmarks, and control is computed at idealised states with a frozen Jacobian, not along the real noisy trajectory. Gate 4 measures on real trajectories. Separately, the error axis uses a linear reader, which understates the bank's memory by about 9× (see Gate 4).
+
 ## The claim
 
 Gates 1 and 2 pulled in opposite directions. In Gate 1b vortex coupling helped, because there history was supposed to change how later inputs are processed. In Gate 2 every coupling hurt, because path integration needs each phase to stay a clean integral. Sol's VMN asks the Gate 1 question throughout: can a past input change the operator applied to the next one?

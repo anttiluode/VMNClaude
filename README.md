@@ -6,7 +6,7 @@ Claude (Opus 5.5) side of the VMN line. Sol works the same question in [VMN](htt
 
 **Short answer, from the note and its checks:** yes, through one term. The nonlinearity that matters is **shear**, frequency that depends on amplitude. It appears as a vortex's self-rotation, as the β of an oscillator neuron, and as the amplitude-dependent wave speed in [Kompressori](https://github.com/anttiluode/Kompressori). Without a nonlinearity, no event can change how a system responds to the next input (§0).
 
-Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks) and **[GATE2.md](GATE2.md)** (path integration). Every number is in a receipt under `results/`.
+Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Layer tests: **[GATE1.md](GATE1.md)** (reservoir benchmarks), **[GATE2.md](GATE2.md)** (path integration), **[GATE3.md](GATE3.md)** (memory vs control) and **[GATE4.md](GATE4.md)** (ping-and-listen goal vectors). Every number is in a receipt under `results/`.
 
 ## The entorhinal link
 
@@ -19,19 +19,31 @@ The entorhinal cortex's best-known models are built from the same pieces as VMN:
 - **The hexagon–vortex-lattice look-alike.** Grid hexagons resemble the hexagonal vortex lattices of superconductors and rotating superfluids, and the analogy has been drawn ([Chalyi, Ukr. J. Phys. 2022](https://ujp.bitp.kiev.ua/index.php/uik/en/article/view/2022537)). But hexagons appear whenever repelling objects pack in 2D, so the shared shape is not evidence of a shared mechanism.
 - **AI cousin:** rotary position embeddings (RoPE) in transformers encode position by rotating vectors by angles proportional to position, which is the Gao et al. picture. The grid-cell resemblance has, I believe, been pointed out by others; not checked.
 
-## Latest: Gate 3 — memory vs control, and event-gated coupling
+## Latest: Gate 4 — ping the memory with a goal, listen for the vector to it
+
+![gate 4](results/gate4_summary.png)
+
+Full write-up: **[GATE4.md](GATE4.md)**. Prompted by Sol's correction to Gate 3: an uncoupled oscillator's response operator *rotates* with its stored phase, so a fixed probe gets a phase-dependent answer with no coupling at all. Singular values (Gate 3's measure) are blind to that.
+
+The task: path-integrate a position (Gate 2). Then ping the bank with the phase pattern a goal location *would* produce, and listen to each unit's phase advance. To first order that advance is sin(goal phase − stored phase), which interferes the goal against the memory.
+
+- **It works without coupling (K1 passes).** Goal-vector error is 0.027 (box width 1), against 0.235 for answering "the goal is here".
+- **It is nearly ideal (K2 narrowly fails).** Reading the phases directly gives 0.018, so the physical ping loses about a third.
+- **Listening barely disturbs the memory.** A small ping adds 0.0003 to position error.
+- **Vortex coupling adds nothing (K3 fails).** Coupling switched on by the ping ties at best; steady coupling is 2.4× worse. This is the fourth gate in which vortex coupling does not earn its place.
+- **Correction to Gates 2 and 3:** with a capable (kNN) reader, the uncoupled bank's absolute position error is **0.021, not 0.198**. The linear reader understated the memory by about 9×. Each unit drifts 0.71 rad, yet 40 units together pin position: redundancy does the error correction for free.
+
+**What survives:** integrate silently in uncoupled isochronous oscillators; query by stimulating and listening; no coupling needed. The ping's value is the interface. A reader that can only inject into a port and listen, never inspect internal state, can still ask "where is the goal from here?". That is the situation of a physical substrate. None of this is new neuroscience (oscillatory interference; goal vectors from grid codes, Bush et al. 2015).
+
+## Gate 3 — memory vs control, and event-gated coupling
 
 ![gate 3](results/gate3_summary.png)
 
-Full write-up: **[GATE3.md](GATE3.md)**. Gate 1 (coupling helps) and Gate 2 (coupling hurts) are two ends of one trade-off, fixed by symmetry. An uncoupled bank's phases are perfect integrators, but the response operator cannot see what they store. Coupling lets the operator see the stored state (control) and makes the phases drift. Kill conditions were written before running, and all three pass.
+Full write-up: **[GATE3.md](GATE3.md)**, which now opens with Sol's correction. Coupling makes stored position change the *strength* of the bank's responses (rotation-invariant control) at the direct price of integration accuracy, and coupling switched on only 10% of the time gets 7–9× more of that control at the same error. **Corrected:** the original claim that an uncoupled bank's operator "cannot see what is stored" is wrong. It rotates with the stored phase, which Gate 4 shows is enough for a useful query. Gate 3's error axis also used a linear reader (see Gate 4).
 
-- **The trade-off is real.** Control is exactly 0 without coupling and grows linearly with κ. No coupling strength lowers path-integration error; past κ ≈ 0.01, error climbs to chance by κ = 0.3.
-- **Global phase:** rotating all phases together leaves the operator's singular values untouched under linear coupling (4×10⁻¹⁶) and changes them by 3.8% under vortex coupling.
-- **Event gating wins:** coupling switched on only 10% of the time gives **7–9× more control** than steady coupling at the same error. That is close to the expected ~10×, so this confirms the scaling rather than surprising.
-- **Not pre-registered:** vortex coupling beats linear on *both* axes at every κ ≥ 0.01, with more control and less error.
-- **Not shown:** that the control is *useful*. That needs a task where the answer must depend on stored position, which is the next gate.
-
-Design rule: keep the integrator symmetric, and break the symmetry briefly, only when a state-dependent response is needed.
+- Rotation-invariant control is exactly 0 without coupling and grows linearly with κ; no coupling lowers integration error.
+- A global rotation leaves singular values untouched under linear coupling (4×10⁻¹⁶) and changes them by 3.8% under vortex coupling.
+- Not pre-registered: vortex beats linear on both axes at every κ ≥ 0.01.
 
 ## Gate 2 — path integration, the entorhinal setting
 
@@ -78,7 +90,7 @@ Full write-up: **[GATE2.md](GATE2.md)**. A bank of 40 velocity-controlled oscill
 ## Run
 
 ```bash
-pip install numpy matplotlib
+pip install numpy scipy matplotlib
 python vmn_checks.py         # ~70 s
 python make_figure.py
 python gate1_layer.py        # ~13 min
@@ -86,6 +98,10 @@ python gate1b_followups.py   # ~8 min
 python make_gate1_figure.py
 python gate2_path.py         # ~5 min
 python make_gate2_figure.py
+python gate3_tradeoff.py     # ~4 min
+python make_gate3_figure.py
+python gate4_ping.py         # ~1 min
+python make_gate4_figure.py
 ```
 
-Files: `vmn_core.py` (vortex dynamics, exact Jacobians, oscillators) · `vmn_checks.py` (maths checks) · `gate1_layer.py`, `gate1b_followups.py` (reservoir test) · `gate2_path.py` (path integration) · `make_figure.py`, `make_gate1_figure.py`, `make_gate2_figure.py` · `results/`.
+Files: `vmn_core.py` (vortex dynamics, exact Jacobians, oscillators) · `vmn_checks.py` (maths checks) · `gate1_layer.py`, `gate1b_followups.py` (reservoir test) · `gate2_path.py` (path integration) · `gate3_tradeoff.py` (memory vs control) · `gate4_ping.py` (ping-and-listen) · `make_figure.py`, `make_gate1_figure.py` … `make_gate4_figure.py` · `results/`.

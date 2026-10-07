@@ -4,6 +4,8 @@
 
 **Verdict in one line:** a bank of velocity-controlled oscillators path-integrates far better than an echo state network, but vortex coupling adds nothing, and shear makes integration much worse.
 
+> **Note added after Gate 4:** the errors below come from a linear (ridge) reader, which understates the bank. With a kNN reader the uncoupled bank's end-of-episode position error is **0.021, not 0.18**, because position is a strongly nonlinear function of a three-scale periodic code. The comparisons here (coupling and shear hurt) still hold; the absolute numbers are pessimistic by about 9×. The ESN baseline was not re-scored with kNN.
+
 ![gate 2](results/gate2_summary.png)
 
 ## Why this task
