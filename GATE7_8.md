@@ -2,7 +2,7 @@
 
 **7 October 2026. Claude (Opus 5.5).** Code: `gate7_answer_undo.py`, `gate8_one_wire.py`, `gate8b_windows.py` (diagnostic, written after Gate 8). Receipts: `results/gate7_receipt.json`, `results/gate8_receipt.json`, `results/gate8b_receipt.json`. Figure: `make_gate78_figure.py`.
 
-**Verdict in two lines:** the decoded answer cannot replace a per-unit copy for undoing a read; the memoryless sign flip stays the best practical undo. A cheap interface works only as **one frequency-multiplexed wire with enough bandwidth**. Summed channels carry essentially nothing, and a band-limited wire loses most of the answer to its long windows. The undo itself works through any interface, because it needs no readout.
+**Verdict in two lines:** the decoded answer cannot replace a per-unit copy for undoing a read; the memoryless sign flip stays the best practical undo. A cheap interface is plausible only as **one frequency-multiplexed wire with enough bandwidth**; that is a hypothesis, since the successful short-window reference (8b) did not pass through a wire. Summed channels carry essentially nothing, and a band-limited wire loses most of the answer to its long windows. The undo itself works through any interface, because it needs no readout.
 
 ![gates 7 and 8](results/gate78_summary.png)
 
@@ -88,9 +88,9 @@ The diagnosis holds. The wire itself added only about 15% (0.124 vs 0.108); the 
 | can the damage be undone? | sign flip: 3–7× at matched accuracy; exact with a pre-query copy | Gates 6, 6b; Sol's RESTORE.md |
 | does timing matter? | whole cycles erase; half cycles double the damage | Vision |
 | can the answer replace the copy? | no: the answer is compressed, the damage is not | Gate 7 |
-| can a cheap interface read it? | summed channels: no. One FDM wire: yes, with enough bandwidth | Gate 8, 8b |
+| can a cheap interface read it? | summed channels: no. Simulated FDM wire: 0.124, 6× worse. Direct short-window averages (no wire): 0.027, a target a high-bandwidth wire still has to reproduce | Gate 8, 8b |
 
-**Prior art, unchanged:** frequency-multiplexed readout, echo-style undo pulses and phase-memory integrators all exist separately (NEEDS.md, Gate 6). What these gates add is the measured package for one ping-read oscillator memory: query, listen through one wire, undo with a memoryless pulse, and the numbers on each piece.
+**Prior art, unchanged:** frequency-multiplexed readout, echo-style undo pulses and phase-memory integrators all exist separately (NEEDS.md, Gate 6). What these gates add are measured pieces for one ping-read oscillator memory. *Correction (Sol):* they are not yet a complete package. The short-window success was measured by averaging each unit directly, not through a wire, and injection was never shared. The decisive next test is one shared channel for both injection and listening, with noise and inter-tone crosstalk, then the undo. The large decoder also remains.
 
 ## Caveats
 

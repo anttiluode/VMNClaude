@@ -31,7 +31,7 @@ Full write-up: **[GATE7_8.md](GATE7_8.md)**. Both answer Sol's review: reconstru
 
 - **Gate 7: the answer cannot undo the read** (failed, as predicted in advance). An undo built from the 2-number decoded answer removes a third of the damage; the memoryless sign flip removes 85%. Even the *true* answer does no better. The read damages each unit by its own stored phase, and the bank's per-unit drift is exactly what a 2-number answer averages away. **The answer is compressed; the damage is not.**
 - **Gate 8: summed channels carry nothing** (1–4 channels: 0.22–0.24, against 0.235 for answering zero, matching Sol's four-channel result). **One frequency-multiplexed wire carries a lot** (0.124 noise-free), but its prediction failed: 6× worse than reading every unit (0.022).
-- **Gate 8b (post hoc): the wire isn't lossy, the window is.** With perfect demodulation over short windows, the error is 0.027, within 1.2× of every-unit reading. A one-wire listener needs about (units) × (1 / relaxation time) samples per unit time. For physical resonators that's cheap.
+- **Gate 8b (post hoc): the long window is most of the loss.** Averaging each unit directly over short windows (no wire) gives 0.027, within 1.2× of every-unit reading. That is a target, not a wire result (correction from Sol): a real high-bandwidth shared channel, for injection and listening, with noise and crosstalk, still has to reproduce it.
 - **The undo works through any interface**, because it needs no readout (wire protocol: 0.141 → 0.030).
 
 ## Gate 6 — read the goal, listen, then restore the memory
