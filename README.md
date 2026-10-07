@@ -16,7 +16,7 @@ Full derivations: **[VMN_NOTE.md](VMN_NOTE.md)**. Every number below is in `resu
 | §2 | Event → low-rank update | A new vortex changes each old vortex's response by a tidal strain $`\lvert g\rvert/2\pi r^2`$; effective rank ≈ 5.7 from N = 25 to 6400 | Exact one-step; finite horizon measured |
 | §2 | Finite horizon | Update rank 4–7 while propagator rank grows with N (T = 1) | Measured; meaningless at long T, where everything collapses |
 | §3 | Vortex → Neuron | Co-rotating pair in strain: frozen = Adler/SNIC neuron, free = heteroclinic (log) onset | Verified; slope 20.03 vs 20.0 |
-| §4 | Neuron → Matrix | Stuart–Landau with shear keeps $`-\beta\rho_0/\sqrt\mu`$ of a kick; memory diverges at the Hopf point | Verified; as an explanation of the Kármán computing peak it is a hypothesis |
+| §4 | Neuron → Matrix | Stuart–Landau with shear keeps $`-\beta\rho_0/\sqrt\mu`$ of a kick; memory diverges at the Hopf point | Verified. Corrected: the useful optimum should sit just *below* onset, where memory is long but still fades (matches the wake study); a hypothesis, untested on the wake |
 
 ## What this does not show
 

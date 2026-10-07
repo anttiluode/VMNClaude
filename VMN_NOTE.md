@@ -12,7 +12,7 @@ Ledger first:
 | Antilinear complex-symmetric form of the vortex response (§1) | Derived here. Standard algebra; probably known in pieces. Verified to machine precision. |
 | Tidal update law and N-independent rank of an event (§2) | Derived here. Exact one-step result, verified. Finite-horizon behaviour is **measured**, not proved. |
 | Co-rotating pair in strain as a neuron, with two onset classes (§3) | Derivation is elementary; verified numerically. |
-| Memory scaling β/√μ near the Hopf point (§4) | Standard phase-reduction result, verified. Its use as an **explanation** of the Kármán computing peak is a hypothesis, untested on that system. |
+| Memory scaling β/√μ near the Hopf point (§4) | Standard phase-reduction result, verified. Its use as an **explanation** of the Kármán computing peak is a hypothesis, untested on that system, and was corrected after reading Sol's VMN (peak is just below onset). |
 
 ![summary](results/vmn_summary.png)
 
@@ -147,7 +147,9 @@ Kick the amplitude by $`\rho_0`$. The amplitude relaxes in time $`1/2\mu`$, but 
 
 Measured with the same kick at μ = 0.4, 0.1, 0.025, 0.00625: the agreement is better than 0.01%, and the stored phase grows 8× as μ shrinks 64×. Below onset (μ < 0) a kick decays at rate |μ|, also measured exactly. **Both the memory time and the stored phase diverge at the Hopf point, from both sides.**
 
-This is a candidate explanation, not a test, for the result in *Computing with vortices* (arXiv:2001.08502): memory and nonlinear processing of a cylinder wake peak near the onset of shedding. That onset is this Hopf point. Testing it would mean checking whether the wake's measured memory curve follows 1/|μ|.
+**Correction (after reading Sol's VMN):** the cylinder-wake study (Goto, Nakajima & Notsu, arXiv:2001.08502, published as *Twin vortex computer in fluid flow*, NJP 2021) finds its peak at Re ≈ 40, **just below** shedding onset near 45, and reports that synchronization deteriorates once shedding starts. My earlier wording, "peak at onset from both sides", was wrong for that system.
+
+The mechanism above explains why. The same phase neutrality that stores a kick above onset also stores the *initial condition*. A reservoir must give the same answer from different starting states (fading memory, or the echo-state property), and a free phase never forgets where it started. Below onset, memory lasts 1/|μ| but still fades; above onset, the phase never fades. So the expected optimum is **on the stable side, close to onset**: long memory that still forgets. This is consistent with the wake result, but it is still a hypothesis about that system, not a test of it.
 
 **The Hamiltonian limit is a different kind of memory.** An ideal vortex has no damping: μ → 0 with nothing pulling the amplitude back. A satellite vortex orbiting circulation Γ has $`\omega=\Gamma/2\pi r^2`$, so a radial kick δr changes its frequency permanently, and the phase error grows **linearly forever**:
 
@@ -193,7 +195,7 @@ Kill conditions, fixed in advance:
 
 1. Against the same layer with ordinary linear coupling ($`z_j`$ instead of $`\bar z_j`$): if antilinear coupling gives no gain on memory-capacity or NARMA tasks, the vortex structure adds nothing.
 2. Against LinOSS and coRNN at equal parameter count on long-memory tasks: no gain → not useful as an AI layer.
-3. Sweep μ through zero: if task memory does not peak near μ = 0 as §4 predicts, §4's explanation is wrong for this system.
+3. Sweep μ through zero: if task performance does not peak on the stable side close to μ = 0, with consistency breaking above it, §4's explanation is wrong for this system.
 
 ## Run
 
