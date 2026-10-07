@@ -49,14 +49,14 @@ M_{kk}=-\sum_{j\ne k}M_{kj}.
 Three facts follow, and all three are checked:
 
 1. **The response is antilinear.** A perturbation $`\delta z`$ produces a velocity proportional to its *conjugate*. Geometrically, each 2×2 block is a pure strain (symmetric, traceless), never a rotation. This is because $`\log|z|`$ is harmonic. Measured: $`\operatorname{tr}K=0`$, and the antilinear form matches the real Jacobian to $`3\times10^{-16}`$.
-2. **Weighted by circulation, it is complex symmetric:** $`\operatorname{diag}(\Gamma)M=(\operatorname{diag}(\Gamma)M)^{\mathsf T}`$, measured to $`10^{-16}`$. Antilinear maps of this type are diagonalised by the Takagi factorisation, not ordinary eigenvectors.
-3. **Frequencies are square roots of a linear spectrum.** Applying the map twice gives a complex-linear map, so
+2. **Weighted by circulation, it is complex symmetric:** $`\operatorname{diag}(\Gamma)M=(\operatorname{diag}(\Gamma)M)^{\mathsf T}`$, measured to $`10^{-16}`$. This is the Hamiltonian structure showing through. (Earlier I wrote that this makes the map Takagi-diagonalisable. Sol pointed out that needs more care: Takagi applies to a complex-symmetric matrix, and $`M`$ itself is symmetric only after the Γ weighting, which mixes with the inner product. Claim withdrawn.)
+3. **The frozen Jacobian's spectrum comes from one complex matrix.** Applying the map twice gives a complex-linear map, so
 
 ```math
 \operatorname{spec}(K)^2=\operatorname{spec}(M\bar M)\cup\overline{\operatorname{spec}(M\bar M)}.
 ```
 
-Verified exactly (to 9 digits) on random configurations. The oscillation frequencies of any vortex arrangement come from one complex matrix, $`M\bar M`$.
+Verified exactly (to 9 digits) on random configurations. This describes the Jacobian **frozen at one configuration**, so it gives local growth and rotation rates there. It is not the oscillation frequencies of the actual motion, which follows the evolving operator (Sol's correction; my first wording overstated it).
 
 **What this buys:** a vortex system *is* a matrix system, specifically a strain-only, antilinear one. Any "vortex–matrix coupling" design should keep that structure; an ordinary symmetric or rotation coupling would be a different physics.
 
@@ -74,7 +74,7 @@ Add one vortex of strength $`g`$ at position $`w`$ (the "event"). The response a
 Each block is a tidal strain with both singular values $`|g|/2\pi r_k^2`$. Two consequences:
 
 - **The update a vortex feels does not depend on its own circulation.** Measured: off-block-diagonal norm exactly 0; singular values match the formula to $`10^{-14}`$.
-- **The effective rank saturates.** The participation rank is $`2\big(\sum r_k^{-4}\big)^2/\sum r_k^{-8}`$. In two dimensions $`\sum r^{-4}`$ converges at fixed density, so the rank is set by the nearest neighbours, not by N.
+- **The exact rank is full, the effective rank saturates.** Every block is invertible for $`g\ne0`$, so the exact rank of the old-to-old update is $`2N`$ (Sol; this is the add-a-vortex analogue of Sol's $`2N-2`$ theorem for moving one). The energy is what concentrates: the participation rank is $`2\big(\sum r_k^{-4}\big)^2/\sum r_k^{-8}`$. In two dimensions $`\sum r^{-4}`$ converges at fixed density, so the rank is set by the nearest neighbours, not by N.
 
 Measured at fixed density, median over 40 draws:
 
@@ -83,6 +83,8 @@ Measured at fixed density, median over 40 draws:
 | 25 | 50 | 6.1 | 16 |
 | 400 | 800 | 5.8 | 24.5 |
 | 6400 | 12800 | 5.7 | 25.5 |
+
+The two columns are different measures: about 6 directions by participation, about 26 to reach 95% of the energy. Neither grows with N. "Low rank" in this note always means effective rank.
 
 The 1/r² tidal law is why a local event is cheap to describe. This is the vortex version of the one-step bound in the Kompressori note (one cell touches at most five Jacobian rows), but here the cause is a decay law rather than a finite stencil.
 
@@ -139,17 +141,28 @@ The amplitude of the Kármán vortex street just past onset obeys the Landau equ
 
 where μ is the distance past the Hopf point and β is the **shear**: how much the frequency depends on amplitude. So the vortex street, reduced to its amplitude, is literally an oscillator neuron.
 
-Kick the amplitude by $`\rho_0`$. The amplitude relaxes in time $`1/2\mu`$, but because of shear the phase does not come back:
+Kick the amplitude by $`\rho_0`$ (radius staying positive). The amplitude relaxes in time $`1/2\mu`$, but because of shear the phase does not come back. The exact result (Sol's sharpening of my small-kick formula) is
 
 ```math
-\Delta\varphi_\infty=-\frac{\beta\,\rho_0}{\sqrt{\mu}} .
+\Delta\varphi_\infty=-\beta\log\!\Big(1+\frac{\rho_0}{\sqrt{\mu}}\Big)\;\approx\;-\frac{\beta\,\rho_0}{\sqrt{\mu}} .
 ```
 
-Measured with the same kick at μ = 0.4, 0.1, 0.025, 0.00625: the agreement is better than 0.01%, and the stored phase grows 8× as μ shrinks 64×. Below onset (μ < 0) a kick decays at rate |μ|, also measured exactly. **Both the memory time and the stored phase diverge at the Hopf point, from both sides.**
+It follows in one line: $`u=r^2`$ obeys $`\dot u=2u(\mu-u)`$, so $`\int(u-\mu)\,dt=-\tfrac12\log(u_\infty/u_0)`$. Measured with the same tiny kick at μ = 0.4 … 0.00625, the exact formula matches to ~10⁻¹⁰ relative, and a large kick of half the cycle amplitude gives −β log 1.5 at every μ to 10⁻¹¹. Below onset (μ < 0) a kick decays at rate |μ|, also measured exactly.
+
+**Two corrections to my first reading, both from Sol and both verified:**
+
+- A kick that is a fixed *fraction* of the cycle amplitude stores the same phase at every μ. Growing sensitivity near Hopf is sensitivity to absolute kicks, not a growing memory capacity.
+- The stored phase and the stored *response change* move in opposite directions. Two relaxed states differing only by phase Δφ have Jacobians differing by exactly
+
+```math
+\|\Delta J\|_2=2\mu\sqrt{1+\beta^2}\,|\sin\Delta\varphi| ,
+```
+
+verified to machine precision. Going from μ = 0.4 to 0.00625, the phase kept from the same kick grows 8×, while the response-matrix change it leaves shrinks. **Stored timing and changed response geometry are different measurements**, and Kompressori-style questions are about the second.
 
 **Correction (after reading Sol's VMN):** the cylinder-wake study (Goto, Nakajima & Notsu, arXiv:2001.08502, published as *Twin vortex computer in fluid flow*, NJP 2021) finds its peak at Re ≈ 40, **just below** shedding onset near 45, and reports that synchronization deteriorates once shedding starts. My earlier wording, "peak at onset from both sides", was wrong for that system.
 
-The mechanism above explains why. The same phase neutrality that stores a kick above onset also stores the *initial condition*. A reservoir must give the same answer from different starting states (fading memory, or the echo-state property), and a free phase never forgets where it started. Below onset, memory lasts 1/|μ| but still fades; above onset, the phase never fades. So the expected optimum is **on the stable side, close to onset**: long memory that still forgets. This is consistent with the wake result, but it is still a hypothesis about that system, not a test of it.
+A mechanism that fits this: the same phase neutrality that stores a kick above onset also stores the *initial condition*. A reservoir must give the same answer from different starting states (fading memory, or the echo-state property), and a free phase never forgets where it started. Below onset, memory lasts 1/|μ| but still fades; above onset, the phase never fades. So the expected optimum is **on the stable side, close to onset**: long memory that still forgets. This is consistent with the wake result, but it is still a hypothesis about that system, not a test of it.
 
 **The Hamiltonian limit is a different kind of memory.** An ideal vortex has no damping: μ → 0 with nothing pulling the amplitude back. A satellite vortex orbiting circulation Γ has $`\omega=\Gamma/2\pi r^2`$, so a radial kick δr changes its frequency permanently, and the phase error grows **linearly forever**:
 
@@ -163,7 +176,7 @@ Measured slope matches to 0.015%. A dissipative neuron stores a kick as a finite
 
 ## 5. What the three have in common
 
-The nonlinearity Antti sensed is the same term in all three, and it has a name: **shear**, frequency depending on amplitude.
+The nonlinearity Antti sensed appears in all three as the same term, **shear**: frequency depending on amplitude. Shear is one mechanism by which an event leaves a lasting trace, not a requirement for state-dependent response (Sol): with β = 0 the Jacobian is still state-dependent, but a radial kick no longer turns into a lasting phase.
 
 | | Shear term |
 |---|---|
@@ -181,7 +194,9 @@ An aside, flagged as an identification rather than a result: in a fluid, the loc
 
 ---
 
-## 6. Next gate (proposed, not done)
+## 6. Gate 1: the layer (done, results in [GATE1.md](GATE1.md))
+
+Short version: K1 fires when all units turn the same way (vortex coupling averages out) and passes when units turn both ways, as a follow-up rather than pre-registered; K2 fires (an echo state network wins); K3 passes for memory capacity. The design as first proposed:
 
 A VMN unit layer:
 
@@ -191,10 +206,12 @@ A VMN unit layer:
 
 with units at fixed 2D positions $`p_k`$, inputs $`u_k`$, and a learned linear readout. The coupling is the off-diagonal part of $`M`$ from §1, with the units' oscillator states standing in for vortex displacements. That substitution is the design step being tested, not a derivation.
 
+Sol's caveats, adopted: the positions are fixed, so this tests vortex-shaped *coupling*, not memory stored in moving vortex geometry. And coupling shifts the stability boundary, so the onset is measured from the linearisation rather than assumed to be μ = 0.
+
 Kill conditions, fixed in advance:
 
 1. Against the same layer with ordinary linear coupling ($`z_j`$ instead of $`\bar z_j`$): if antilinear coupling gives no gain on memory-capacity or NARMA tasks, the vortex structure adds nothing.
-2. Against LinOSS and coRNN at equal parameter count on long-memory tasks: no gain → not useful as an AI layer.
+2. Against a standard reservoir at equal real state size: no gain → not useful as a layer. (I had written LinOSS and coRNN; those are trained models, and the fair first comparison for an untrained reservoir is an echo state network. The trained comparison comes later, if this passes.)
 3. Sweep μ through zero: if task performance does not peak on the stable side close to μ = 0, with consistency breaking above it, §4's explanation is wrong for this system.
 
 ## Run

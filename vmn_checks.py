@@ -265,9 +265,31 @@ def check_c5():
         a = vc.stuart_landau(rstar, mu, omega, beta, dt, steps)
         b = vc.stuart_landau(rstar + rho0, mu, omega, beta, dt, steps)
         dphi = float(np.angle(b[-1] / a[-1]))
+        # large kick: half the cycle amplitude, tests the exact law (Sol's correction)
+        big = vc.stuart_landau(1.5 * rstar, mu, omega, beta, dt, steps)
         rows.append({"mu": mu, "phase_shift": dphi,
                      "predicted_-beta*rho0/sqrt(mu)": float(-beta * rho0 / rstar),
+                     "exact_-beta*log(1+rho0/sqrt(mu))": float(-beta * np.log1p(rho0 / rstar)),
+                     "large_kick_0.5r*_phase_shift": float(np.angle(big[-1] / a[-1])),
+                     "large_kick_exact_-beta*log(1.5)": float(-beta * np.log(1.5)),
                      "relaxation_time_1/(2mu)": 1 / (2 * mu)})
+    # response-matrix change between two relaxed states that differ only in phase
+    # (Sol): ||J(z1) - J(z2)||_2 = 2 mu sqrt(1+beta^2) |sin(dphi)|
+    def sl_jac_real(z, mu):
+        # d/d(x,y) of (mu+i w) z - (1+i b)|z|^2 z
+        a_lin = (mu + 1j * omega) - (1 + 1j * beta) * 2 * abs(z) ** 2   # coefficient of dz
+        a_conj = -(1 + 1j * beta) * z * z                                # coefficient of conj(dz)
+        def apply(v):
+            out = a_lin * v + a_conj * np.conj(v)
+            return np.array([out.real, out.imag])
+        return np.column_stack([apply(1.0 + 0j), apply(1j)])
+    dj = []
+    for mu in (0.4, 0.00625):
+        for dph in (0.3, 1.2):
+            r = np.sqrt(mu)
+            d = np.linalg.norm(sl_jac_real(r, mu) - sl_jac_real(r * np.exp(1j * dph), mu), 2)
+            dj.append({"mu": mu, "dphi": dph, "norm_dJ": float(d),
+                       "predicted": float(2 * mu * np.sqrt(1 + beta ** 2) * abs(np.sin(dph)))})
     # below onset: linear decay time 1/|mu|
     below = []
     for mu in (-0.4, -0.1, -0.025):
@@ -286,8 +308,9 @@ def check_c5():
     t = np.arange(steps + 1) * dt
     slope = float(np.polyfit(t, dphi, 1)[0])
     return {
-        "claim": "Stuart-Landau with shear beta: an amplitude kick rho0 leaves a permanent phase shift -beta rho0/sqrt(mu) after relaxing in 1/(2mu); memory diverges at the Hopf onset from both sides. A Hamiltonian vortex is the mu -> 0 limit: the kick is stored as a frequency shift and the phase error grows linearly forever",
+        "claim": "Stuart-Landau with shear beta: a radial kick rho0 leaves the exact permanent phase shift -beta log(1 + rho0/sqrt(mu)) (Sol; small-kick limit -beta rho0/sqrt(mu)). The phase is stored, but the response-matrix change it causes is 2 mu sqrt(1+beta^2)|sin dphi| and shrinks toward onset (Sol). A Hamiltonian vortex stores a kick as a frequency shift and the phase error grows linearly",
         "above_onset": rows,
+        "phase_to_response_matrix_change": dj,
         "below_onset": below,
         "hamiltonian_vortex": {"phase_drift_slope": slope,
                                "predicted_-2G dr/(2 pi r^3)": float(-2 * G * dr / (2 * np.pi * r ** 3))},

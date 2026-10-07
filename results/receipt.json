@@ -233,31 +233,69 @@
     }
   },
   "C5_memory_near_hopf": {
-    "claim": "Stuart-Landau with shear beta: an amplitude kick rho0 leaves a permanent phase shift -beta rho0/sqrt(mu) after relaxing in 1/(2mu); memory diverges at the Hopf onset from both sides. A Hamiltonian vortex is the mu -> 0 limit: the kick is stored as a frequency shift and the phase error grows linearly forever",
+    "claim": "Stuart-Landau with shear beta: a radial kick rho0 leaves the exact permanent phase shift -beta log(1 + rho0/sqrt(mu)) (Sol; small-kick limit -beta rho0/sqrt(mu)). The phase is stored, but the response-matrix change it causes is 2 mu sqrt(1+beta^2)|sin dphi| and shrinks toward onset (Sol). A Hamiltonian vortex stores a kick as a frequency shift and the phase error grows linearly",
     "above_onset": [
       {
         "mu": 0.4,
         "phase_shift": -3.162252657842053e-05,
         "predicted_-beta*rho0/sqrt(mu)": -3.1622776601683795e-05,
+        "exact_-beta*log(1+rho0/sqrt(mu))": -3.162252660431899e-05,
+        "large_kick_0.5r*_phase_shift": -0.8109302161960503,
+        "large_kick_exact_-beta*log(1.5)": -0.8109302162163288,
         "relaxation_time_1/(2mu)": 1.25
       },
       {
         "mu": 0.1,
         "phase_shift": -6.324455324875548e-05,
         "predicted_-beta*rho0/sqrt(mu)": -6.324555320336759e-05,
+        "exact_-beta*log(1+rho0/sqrt(mu))": -6.324455322444894e-05,
+        "large_kick_0.5r*_phase_shift": -0.8109302161952421,
+        "large_kick_exact_-beta*log(1.5)": -0.8109302162163288,
         "relaxation_time_1/(2mu)": 5.0
       },
       {
         "mu": 0.025,
         "phase_shift": -0.00012648710657313202,
         "predicted_-beta*rho0/sqrt(mu)": -0.00012649110640673518,
+        "exact_-beta*log(1+rho0/sqrt(mu))": -0.00012648710657538198,
+        "large_kick_0.5r*_phase_shift": -0.8109302161953523,
+        "large_kick_exact_-beta*log(1.5)": -0.8109302162163288,
         "relaxation_time_1/(2mu)": 20.0
       },
       {
         "mu": 0.00625,
         "phase_shift": -0.00025296621429449375,
         "predicted_-beta*rho0/sqrt(mu)": -0.00025298221281347036,
+        "exact_-beta*log(1+rho0/sqrt(mu))": -0.0002529662141625808,
+        "large_kick_0.5r*_phase_shift": -0.810930216195495,
+        "large_kick_exact_-beta*log(1.5)": -0.8109302162163288,
         "relaxation_time_1/(2mu)": 80.0
+      }
+    ],
+    "phase_to_response_matrix_change": [
+      {
+        "mu": 0.4,
+        "dphi": 0.3,
+        "norm_dJ": 0.5286426166556338,
+        "predicted": 0.5286426166556332
+      },
+      {
+        "mu": 0.4,
+        "dphi": 1.2,
+        "norm_dJ": 1.667282203127591,
+        "predicted": 1.667282203127591
+      },
+      {
+        "mu": 0.00625,
+        "dphi": 0.3,
+        "norm_dJ": 0.008260040885244287,
+        "predicted": 0.008260040885244268
+      },
+      {
+        "mu": 0.00625,
+        "dphi": 1.2,
+        "norm_dJ": 0.026051284423868556,
+        "predicted": 0.026051284423868608
       }
     ],
     "below_onset": [
@@ -282,5 +320,5 @@
       "predicted_-2G dr/(2 pi r^3)": -3.183098861837907e-05
     }
   },
-  "seconds": 67.6
+  "seconds": 68.2
 }
